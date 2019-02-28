@@ -1,8 +1,7 @@
-diff --git a/include/target.mk b/include/target.mk
-index 3099448..cc9c546 100644
---- a/include/target.mk
-+++ b/include/target.mk
-@@ -155,18 +155,21 @@ LINUX_RECONF_DIFF = $(call __linux_confcmd,$(filter-out $(LINUX_RECONFIG_TARGET)
+diff -rup include/target.mk include.b/target.mk
+--- a/include/target.mk	2019-02-21 10:40:25.084696836 -0500
++++ b/include/target.mk	2019-02-24 18:22:33.861601025 -0500
+@@ -162,18 +162,21 @@ LINUX_RECONF_DIFF = $(call __linux_confc
  ifeq ($(DUMP),1)
    BuildTarget=$(BuildTargets/DumpCurrent)
  
@@ -25,6 +24,6 @@ index 3099448..cc9c546 100644
 +    CPU_CFLAGS_34kc = -march=34kc
 +    CPU_CFLAGS_74kc = -march=74kc
 +    CPU_CFLAGS_1004kc = -march=1004kc
-     CPU_CFLAGS_octeon = -march=octeon -mabi=64
+     CPU_CFLAGS_octeonplus = -march=octeon+ -mabi=64
    endif
    ifeq ($(ARCH),i386)

@@ -1,34 +1,35 @@
 diff --git a/package/libs/openssl/Config.in b/package/libs/openssl/Config.in
-index dbcd11a..571db91 100644
+index 3ad8a66..e0d4d50 100644
 --- a/package/libs/openssl/Config.in
 +++ b/package/libs/openssl/Config.in
-@@ -50,6 +50,12 @@ config OPENSSL_ENGINE_DIGEST
- 	depends on OPENSSL_ENGINE_CRYPTO
- 	prompt "Digests acceleration support"
+@@ -266,6 +266,13 @@ config OPENSSL_ENGINE_CRYPTO
+ 		API modules) for /dev/crypto to show up and use hardware
+ 		acceleration; otherwise it falls back to software.
  
 +config OPENSSL_THREADS
-+	bool
-+	prompt "Threading support"
-+	default y
-+	select PACKAGE_libpthread
++       bool
++       prompt "Threading support"
++       default y
++       select PACKAGE_libpthread
 +
- config OPENSSL_HARDWARE_SUPPORT
++
+ config OPENSSL_WITH_ASYNC
  	bool
- 	default n
+ 	prompt "Enable asynchronous jobs support"
 diff --git a/package/libs/openssl/Makefile b/package/libs/openssl/Makefile
-index 9b64302..1bc9e85 100644
+index 732e3eb..747fe17 100644
 --- a/package/libs/openssl/Makefile
 +++ b/package/libs/openssl/Makefile
-@@ -34,6 +34,7 @@ PKG_CONFIG_DEPENDS:= \
- 	CONFIG_OPENSSL_WITH_EC2M \
- 	CONFIG_OPENSSL_WITH_SSL3 \
- 	CONFIG_OPENSSL_HARDWARE_SUPPORT \
-+	CONFIG_OPENSSL_THREADS \
- 	CONFIG_OPENSSL_WITH_DEPRECATED \
- 	CONFIG_OPENSSL_WITH_DTLS \
- 	CONFIG_OPENSSL_WITH_COMPRESSION \
-@@ -127,6 +128,12 @@ ifndef CONFIG_OPENSSL_HARDWARE_SUPPORT
-   OPENSSL_OPTIONS += no-hw
+@@ -33,6 +33,7 @@ PKG_CPE_ID:=cpe:/a:openssl:openssl
+ PKG_CONFIG_DEPENDS:= \
+ 	CONFIG_OPENSSL_ENGINE \
+ 	CONFIG_OPENSSL_ENGINE_CRYPTO \
++        CONFIG_OPENSSL_THREADS \
+ 	CONFIG_OPENSSL_NO_DEPRECATED \
+ 	CONFIG_OPENSSL_OPTIMIZE_SPEED \
+ 	CONFIG_OPENSSL_PREFER_CHACHA_OVER_GCM \
+@@ -254,6 +255,12 @@ else
+   OPENSSL_OPTIONS += no-engine
  endif
  
 +ifdef CONFIG_OPENSSL_THREADS
@@ -37,6 +38,6 @@ index 9b64302..1bc9e85 100644
 +  OPENSSL_OPTIONS += no-threads
 +endif
 +
- ifndef CONFIG_OPENSSL_WITH_DEPRECATED
-   OPENSSL_OPTIONS += no-deprecated
+ ifndef CONFIG_OPENSSL_WITH_GOST
+   OPENSSL_OPTIONS += no-gost
  endif
