@@ -22,7 +22,7 @@ index 047d341..8626984 100644
  FEATURES:=usbgadget
 -CPU_TYPE:=24kc
 +CPU_TYPE:=74kc
-+CPU_SUBTARGET:=dsp2
++CPU_SUBTYPE:=dsp2
  SUBTARGETS:=generic tiny nand mikrotik
  
  KERNEL_PATCHVER:=4.14
